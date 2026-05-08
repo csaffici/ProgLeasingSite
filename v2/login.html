@@ -148,9 +148,7 @@
       emailError.style.display = 'none';
       localStorage.setItem('pl_email', email);
       AmpTracker.trackAppOpen();
-      AmpTracker.fetchProfile(email, function (profile) {
-        window.location.href = 'index.html';
-      });
+      window.location.href = 'index.html';
     }
   </script>
 
