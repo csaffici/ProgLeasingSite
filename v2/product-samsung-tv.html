@@ -24,6 +24,7 @@
         <a href="#">My Account</a>
         <a href="#">Learn More</a>
         <a href="#" class="nav-cta">Apply Now</a>
+        <button id="amp-nav-login-btn" onclick="AmpTracker.showLoginModal()" style="background:none;border:1px solid #0096c7;color:#0096c7;padding:7px 16px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;">Sign In</button>
         <span class="lang-toggle">ESP</span>
       </nav>
     </div>
@@ -65,8 +66,11 @@
           <p class="retail-price">Retail price: <span>$899.99</span></p>
         </div>
 
-        <button class="lease-cta" onclick="trackProductView('Samsung 65&quot; Class 4K UHD Smart TV', 'TVs')">Lease This Item</button>
+        <button class="lease-cta" onclick="AmpTracker.trackCheckoutStarted('Samsung 65&quot; Class 4K UHD Smart TV', 'TVs', 899.99, 12)">Lease This Item</button>
         <a href="#" class="btn-outline" style="display:block; text-align:center; margin-bottom:24px;">Apply for Lease Approval</a>
+
+        <!-- Cross-sell panel — populated by tracker.js if profile has Next_Best_Product -->
+        <div id="amp-profile-panel" style="display:none; margin-bottom:20px;"></div>
 
         <div class="product-features">
           <h3>Key Features</h3>
