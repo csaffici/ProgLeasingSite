@@ -147,11 +147,7 @@
     var panel = document.getElementById('amp-profile-panel');
     if (!panel) return;
 
-    if (!profile) {
-      panel.innerHTML = '<p style="color:#666;font-size:13px;">Profile not yet available — attributes not yet configured in Amperity.</p>';
-      panel.style.display = 'block';
-      return;
-    }
+    if (!profile) return;
 
     var tierColor = { HOT: '#e63946', WARM: '#f4a261', COLD: '#90e0ef' };
     var readinessTier = profile.Cross_Sell_Readiness_Tier || '';
@@ -233,6 +229,7 @@
     setEmail(email);
     closeLogin();
     trackAppOpen();
+    personalizeHero(email);
     fetchProfile(email, function(profile) {
       renderProfilePanel(profile);
       updateNavForLoggedIn(email);
