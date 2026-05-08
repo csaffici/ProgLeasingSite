@@ -2,14 +2,15 @@
 (function () {
 
   var CONFIG = {
-    ingestStreamId: 'INGEST_STREAM_ID',
+    streamId: 'esm-3CH4s7Gxp',
+    tenant: 'acme2',
     apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IiZBSyIsImtpZCI6ImRzayIsInRlbmFudCI6ImFjbWUyIn0.eyJhbXAta2V5LWNvZGUiOiJiMmVmYmRmNS01MTFhLTRmYjEtOWEzZC1lNGNkNTdmZDViOTAiLCJzdWIiOiJ0YWstNUNqUTJKcUVROUgiLCJhdWQiOiJkN2ExY2NlYmNhOTQ0NTI4OWFkZWMwMWYwM2MzYzRjMyIsImlzcyI6Imh0dHBzOi8vYXBwLmFtcGVyaXR5LmNvbS8iLCJpYXQiOjE3NzgyNTg0ODQsImV4cCI6MTgwOTc5NDQ4NH0.UpmDtNXHLqDZw63ZyDi_tuJ2leogtdyZ8XyEG5Yx7LE',
     profileCollectionId: 'apc-2RmUSqd9N',
     site: 'ProgressiveL',
     buSource: 'progressive_leasing',
     sessionId: 'sess_' + Math.random().toString(36).substr(2, 12),
     ingestEndpoint: function () {
-      return 'https://ingest.amperity.com/stream/v1/' + this.ingestStreamId;
+      return 'https://acme.amperity.com/prof/events/' + this.streamId;
     },
     profileEndpoint: function (email) {
       return 'https://app.amperity.com/profile-api/v1/collections/' + this.profileCollectionId + '/profiles?email=' + encodeURIComponent(email);
@@ -25,8 +26,8 @@
 
   // ── Event Stream send ────────────────────────────────────────────────
   function send(payload) {
-    if (!CONFIG.ingestStreamId || CONFIG.ingestStreamId === 'INGEST_STREAM_ID') {
-      console.warn('[Amperity] ingestStreamId not configured — event not sent:', payload.event_type);
+    if (!CONFIG.streamId) {
+      console.warn('[Amperity] streamId not configured — event not sent:', payload.event_type);
       return;
     }
     payload.timestamp  = new Date().toISOString();
@@ -41,6 +42,7 @@
     xhr.open('POST', CONFIG.ingestEndpoint(), true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Authorization', 'Bearer ' + CONFIG.apiKey);
+    xhr.setRequestHeader('Amperity-Tenant', CONFIG.tenant);
     xhr.send(JSON.stringify(payload));
   }
 
