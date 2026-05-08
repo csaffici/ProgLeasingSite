@@ -244,7 +244,7 @@
     if (email) {
       var pageName = document.body.getAttribute('data-amp-page');
       if (pageName) {
-        send({ event_type: 'PL_Product_View', email: email, product_name: pageName, product_category: 'Page View' });
+        send({ event_type: 'PL_Pageload', email: email, product_name: pageName, product_category: 'Page View' });
       }
       fetchProfile(email, function(profile) {
         renderProfilePanel(profile);
