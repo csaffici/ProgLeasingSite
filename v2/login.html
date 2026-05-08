@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In – Progressive Leasing</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="tracker.js" defer></script>
+</head>
+<body>
+
+  <!-- PROMO BANNER -->
+  <div class="promo-banner">
+    Limited time: No payment for 90 days on select items. <a href="#">Learn more</a>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">progressive<span>leasing</span></a>
+      <nav>
+        <a href="retailers.html">Shop Retailers</a>
+        <a href="#">Shop Products</a>
+        <a href="login.html">My Account</a>
+        <a href="#">Learn More</a>
+        <a href="#" class="nav-cta">Apply Now</a>
+        <button id="amp-nav-login-btn" onclick="AmpTracker.showLoginModal()" style="background:none;border:1px solid #0096c7;color:#0096c7;padding:7px 16px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;">Sign In</button>
+        <span class="lang-toggle">ESP</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- LOGIN FORM -->
+  <section style="min-height:70vh; display:flex; align-items:center; justify-content:center; background:#f8f8f8; padding:48px 24px;">
+    <div style="background:#fff; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.08); padding:40px; width:100%; max-width:440px;">
+
+      <div style="text-align:center; margin-bottom:28px;">
+        <div class="logo" style="font-size:24px; margin-bottom:12px;">progressive<span>leasing</span></div>
+        <h1 style="font-size:22px; font-weight:700; margin-bottom:6px;">Sign In to Your Account</h1>
+        <p style="font-size:14px; color:#666;">Manage your lease, track payments, and explore personalized offers.</p>
+      </div>
+
+      <form id="login-form" onsubmit="handleLogin(event)" novalidate>
+
+        <div style="margin-bottom:18px;">
+          <label for="login-email" style="display:block; font-size:13px; font-weight:600; color:#333; margin-bottom:6px;">Email Address</label>
+          <input
+            id="login-email"
+            type="email"
+            placeholder="your@email.com"
+            autocomplete="email"
+            style="width:100%; padding:12px 14px; border:1px solid #ccc; border-radius:6px; font-size:14px; box-sizing:border-box; outline:none; transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='#0096c7'"
+            onblur="this.style.borderColor='#ccc'"
+          >
+          <p id="email-error" style="display:none; color:#e63946; font-size:12px; margin-top:5px;">Please enter a valid email address.</p>
+        </div>
+
+        <div style="margin-bottom:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <label for="login-password" style="font-size:13px; font-weight:600; color:#333;">Password</label>
+            <a href="#" style="font-size:12px; color:#0096c7;">Forgot password?</a>
+          </div>
+          <input
+            id="login-password"
+            type="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            style="width:100%; padding:12px 14px; border:1px solid #ccc; border-radius:6px; font-size:14px; box-sizing:border-box; outline:none; transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='#0096c7'"
+            onblur="this.style.borderColor='#ccc'"
+          >
+        </div>
+
+        <button
+          type="submit"
+          style="width:100%; background:#0096c7; color:#fff; border:none; padding:14px; border-radius:6px; font-size:15px; font-weight:700; cursor:pointer; transition:background 0.2s; margin-bottom:14px;"
+          onmouseover="this.style.background='#0077a8'"
+          onmouseout="this.style.background='#0096c7'"
+        >Sign In</button>
+
+        <p style="text-align:center; font-size:13px; color:#666;">
+          Don't have an account? <a href="#" style="color:#0096c7; font-weight:600;">Apply Now</a>
+        </p>
+
+      </form>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>For Retailers</h4>
+          <ul>
+            <li><a href="#">Become a Retailer</a></li>
+            <li><a href="#">Retailer Login</a></li>
+            <li><a href="#">Retailer Resources</a></li>
+            <li><a href="#">Contact Retail Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Our Business</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Newsroom</a></li>
+            <li><a href="#">Investor Relations</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Progressive Leasing Demo Site. For sales presentation purposes only.</p>
+        <div class="social-links">
+          <a href="#">f</a>
+          <a href="#">in</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AMPERITY DEBUG PANEL -->
+  <div id="amp-debug-panel" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a1a2e;border-top:2px solid #0096c7;padding:12px 24px;max-height:220px;overflow-y:auto;z-index:9998;font-family:monospace;"></div>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      var email = document.getElementById('login-email').value.trim();
+      var emailError = document.getElementById('email-error');
+
+      if (!email || !email.includes('@')) {
+        emailError.style.display = 'block';
+        document.getElementById('login-email').style.borderColor = '#e63946';
+        return;
+      }
+
+      emailError.style.display = 'none';
+      localStorage.setItem('pl_email', email);
+      AmpTracker.trackAppOpen();
+      AmpTracker.fetchProfile(email, function (profile) {
+        window.location.href = 'index.html';
+      });
+    }
+  </script>
+
+</body>
+</html>

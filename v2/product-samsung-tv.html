@@ -6,6 +6,11 @@
   <title>Samsung 65" 4K Smart TV – Progressive Leasing</title>
   <link rel="stylesheet" href="styles.css">
   <script src="tracker.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      AmpTracker.trackProductView('Samsung 65" Class 4K UHD Smart TV', 'TVs');
+    });
+  </script>
 </head>
 <body>
 
@@ -21,7 +26,7 @@
       <nav>
         <a href="retailers.html">Shop Retailers</a>
         <a href="#">Shop Products</a>
-        <a href="#">My Account</a>
+        <a href="login.html">My Account</a>
         <a href="#">Learn More</a>
         <a href="#" class="nav-cta">Apply Now</a>
         <button id="amp-nav-login-btn" onclick="AmpTracker.showLoginModal()" style="background:none;border:1px solid #0096c7;color:#0096c7;padding:7px 16px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;">Sign In</button>
