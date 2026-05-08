@@ -49,19 +49,42 @@
   }
 
   // ── Debug panel ──────────────────────────────────────────────────────
+  var lastPayload = null;
+  var lastStatus  = null;
+
+  function injectDebugToggle() {
+    if (document.getElementById('amp-debug-toggle')) return;
+    var btn = document.createElement('button');
+    btn.id = 'amp-debug-toggle';
+    btn.textContent = 'Events';
+    btn.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9999;background:#1a1a2e;color:#90e0ef;border:1px solid #0096c7;border-radius:4px;padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:0.5px;cursor:pointer;opacity:0.75;';
+    btn.onmouseover = function () { btn.style.opacity = '1'; };
+    btn.onmouseout  = function () { btn.style.opacity = '0.75'; };
+    btn.onclick = function () {
+      var panel = document.getElementById('amp-debug-panel');
+      if (!panel) return;
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    };
+    document.body.appendChild(btn);
+  }
+
   function updateDebugPanel(payload, status) {
     var panel = document.getElementById('amp-debug-panel');
     if (!panel) return;
+    lastPayload = payload;
+    lastStatus  = status;
     var ok = (status >= 200 && status < 300);
     var statusBadge = '<span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:700;background:' +
       (ok ? '#d1fae5;color:#065f46' : '#fee2e2;color:#991b1b') + '">' +
       (ok ? 'SENT ' + status : 'ERROR ' + status) + '</span>';
     var safe = JSON.parse(JSON.stringify(payload));
-    panel.style.display = 'block';
     panel.innerHTML =
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">' +
         '<span style="font-size:11px;font-weight:700;color:#888;letter-spacing:0.5px;">AMPERITY EVENT PAYLOAD</span>' +
-        statusBadge +
+        '<div style="display:flex;gap:10px;align-items:center;">' +
+          statusBadge +
+          '<span onclick="document.getElementById(\'amp-debug-panel\').style.display=\'none\'" style="color:#666;font-size:16px;cursor:pointer;line-height:1;">&times;</span>' +
+        '</div>' +
       '</div>' +
       '<pre style="margin:0;font-size:11px;line-height:1.6;color:#cdd;white-space:pre-wrap;word-break:break-all;">' +
         JSON.stringify(safe, null, 2) +
@@ -240,6 +263,7 @@
 
   // ── Auto-init ────────────────────────────────────────────────────────
   function init() {
+    injectDebugToggle();
     var email = getEmail();
     if (email) {
       var pageName = document.body.getAttribute('data-amp-page');
