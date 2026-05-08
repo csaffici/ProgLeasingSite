@@ -3,7 +3,7 @@
 (function () {
   var CONFIG = {
     ingestStreamId: 'INGEST_STREAM_ID',   // e.g. is-xxxxxxxx
-    apiKey: 'API_KEY',                     // from Amperity Settings > Security > API Keys
+    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IiZBSyIsImtpZCI6ImRzayIsInRlbmFudCI6ImFjbWUyIn0.eyJhbXAta2V5LWNvZGUiOiJiMmVmYmRmNS01MTFhLTRmYjEtOWEzZC1lNGNkNTdmZDViOTAiLCJzdWIiOiJ0YWstNUNqUTJKcUVROUgiLCJhdWQiOiJkN2ExY2NlYmNhOTQ0NTI4OWFkZWMwMWYwM2MzYzRjMyIsImlzcyI6Imh0dHBzOi8vYXBwLmFtcGVyaXR5LmNvbS8iLCJpYXQiOjE3NzgyNTg0ODQsImV4cCI6MTgwOTc5NDQ4NH0.UpmDtNXHLqDZw63ZyDi_tuJ2leogtdyZ8XyEG5Yx7LE',
     site: 'ProgressiveL',
     buSource: 'ProgLeasingSite_v2',
     endpoint: function () {
