@@ -261,6 +261,50 @@
     if (btn) { btn.textContent = 'Sign In'; btn.onclick = AmpTracker.showLoginModal; }
   }
 
+  // ── Hero personalization ─────────────────────────────────────────────
+  var HERO_PERSONAS = {
+    'tlarson759@perkinsandersonandnelson.com': {
+      headline: 'Welcome back, Troy',
+      message:  'Hope our Money App is meeting your needs. Please review your profile to check your eligibility for our Purchasing Power product.',
+      cta:      'View My Profile',
+      ctaHref:  'login.html'
+    },
+    'trooyross@hartbailey.net': {
+      headline: 'Welcome back, Teresa',
+      message:  'Click the link below to learn more about our Money App product and how it can help you when you need it most.',
+      cta:      'Learn About Money App',
+      ctaHref:  '#'
+    },
+    'jzuniga@russellwhite.com': {
+      headline: 'Welcome back, Jermaine',
+      message:  'Check out our featured products below and apply for another lease today.',
+      cta:      'Shop All Retailers',
+      ctaHref:  'retailers.html',
+      swapSections: true
+    }
+  };
+
+  function personalizeHero(email) {
+    var persona = HERO_PERSONAS[email.toLowerCase()];
+    if (!persona) return;
+
+    var hero = document.querySelector('.hero');
+    if (hero) {
+      hero.innerHTML =
+        '<h1>' + persona.headline + '</h1>' +
+        '<p>' + persona.message + '</p>' +
+        '<a href="' + persona.ctaHref + '" class="btn-primary">' + persona.cta + '</a>';
+    }
+
+    if (persona.swapSections) {
+      var retailers = document.querySelector('.retailers-section');
+      var products  = retailers && retailers.nextElementSibling;
+      if (retailers && products) {
+        retailers.parentNode.insertBefore(products, retailers);
+      }
+    }
+  }
+
   // ── Auto-init ────────────────────────────────────────────────────────
   function init() {
     injectDebugToggle();
@@ -270,6 +314,7 @@
       if (pageName) {
         send({ event_type: 'PL_Pageload', email: email, product_name: pageName, product_category: 'Page View' });
       }
+      personalizeHero(email);
       fetchProfile(email, function(profile) {
         renderProfilePanel(profile);
         updateNavForLoggedIn(email);
