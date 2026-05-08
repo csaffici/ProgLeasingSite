@@ -43,7 +43,29 @@
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Authorization', 'Bearer ' + CONFIG.apiKey);
     xhr.setRequestHeader('Amperity-Tenant', CONFIG.tenant);
+    xhr.onload = function () { updateDebugPanel(payload, xhr.status); };
+    xhr.onerror = function () { updateDebugPanel(payload, 'error'); };
     xhr.send(JSON.stringify(payload));
+  }
+
+  // ── Debug panel ──────────────────────────────────────────────────────
+  function updateDebugPanel(payload, status) {
+    var panel = document.getElementById('amp-debug-panel');
+    if (!panel) return;
+    var ok = (status >= 200 && status < 300);
+    var statusBadge = '<span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:700;background:' +
+      (ok ? '#d1fae5;color:#065f46' : '#fee2e2;color:#991b1b') + '">' +
+      (ok ? 'SENT ' + status : 'ERROR ' + status) + '</span>';
+    var safe = JSON.parse(JSON.stringify(payload));
+    panel.style.display = 'block';
+    panel.innerHTML =
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">' +
+        '<span style="font-size:11px;font-weight:700;color:#888;letter-spacing:0.5px;">AMPERITY EVENT PAYLOAD</span>' +
+        statusBadge +
+      '</div>' +
+      '<pre style="margin:0;font-size:11px;line-height:1.6;color:#cdd;white-space:pre-wrap;word-break:break-all;">' +
+        JSON.stringify(safe, null, 2) +
+      '</pre>';
   }
 
   // ── Event helpers ────────────────────────────────────────────────────
